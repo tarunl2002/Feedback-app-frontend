@@ -22,16 +22,17 @@ const App: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:3000/feedback', { name, feedback });
+      await axios.post('http://localhost:5000/feedback', { name, feedback });
       setName('');
       setFeedback('');
-      // Fetch updated feedback list
-      const response = await axios.get('http://localhost:3000/feedback');
+      const response = await axios.get('http://localhost:5000/feedback');
       setFeedbacks(response.data);
     } catch (error) {
       console.error(error);
     }
   };
+
+  console.log(feedbacks)
 
   return (
     <div>
@@ -56,7 +57,7 @@ const App: React.FC = () => {
       </form>
       <h2>All Feedback</h2>
       <ul>
-        {feedbacks.map((fb) => (
+        {feedbacks?.map((fb) => (
           <li key={fb.id}>
             <strong>{fb.name}:</strong> {fb.feedback}
           </li>
