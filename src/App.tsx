@@ -15,7 +15,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<Feedback[]>('http://localhost:5000/feedback');
+        const response = await axios.get<Feedback[]>('https://feedback-app-sw6c.onrender.com/feedback');
         setFeedbacks(response.data);
       } catch (error) {
         console.error('Error fetching feedback:', error);
@@ -28,12 +28,12 @@ const App: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:5000/feedback', { name, feedback });
+      await axios.post('https://feedback-app-sw6c.onrender.com/feedback', { name, feedback });
       setName('');
       setFeedback('');
 
       // Fetch updated feedback list
-      const response = await axios.get<Feedback[]>('http://localhost:5000/feedback');
+      const response = await axios.get<Feedback[]>('https://feedback-app-sw6c.onrender.com/feedback');
       setFeedbacks(response.data);
     } catch (error) {
       console.error('Error submitting feedback:', error);
